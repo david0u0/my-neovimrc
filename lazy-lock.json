@@ -1,0 +1,9 @@
+{
+  "indent-blankline.nvim": { "branch": "master", "commit": "259357fa4097e232730341fa60988087d189193a" },
+  "lazy.nvim": { "branch": "main", "commit": "7e6c863bc7563efbdd757a310d17ebc95166cef3" },
+  "nvim-lspconfig": { "branch": "master", "commit": "8121483b8132b7053120fafd83728178fb3febf6" },
+  "nvim-tree.lua": { "branch": "master", "commit": "375e38673b5c61debd8074ced01cfd4f3b7ce1e9" },
+  "nvim-web-devicons": { "branch": "master", "commit": "5740b7382429d20b6ed0bbdb0694185af9507d44" },
+  "vim-ingo-library": { "branch": "master", "commit": "0c00e2831142d4fd23aa030812b5f18e1d0627b3" },
+  "vim-mark": { "branch": "master", "commit": "fa0898fe5fa8e13aee991534d6cb44f421f07c2c" }
+}
