@@ -13,5 +13,6 @@
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "vim-ingo-library": { "branch": "master", "commit": "0c00e2831142d4fd23aa030812b5f18e1d0627b3" },
   "vim-mark": { "branch": "master", "commit": "fa0898fe5fa8e13aee991534d6cb44f421f07c2c" },
-  "vim-sneak": { "branch": "master", "commit": "c13d0497139b8796ff9c44ddb9bc0dc9770ad2dd" }
+  "vim-sneak": { "branch": "master", "commit": "c13d0497139b8796ff9c44ddb9bc0dc9770ad2dd" },
+  "vim-startify": { "branch": "master", "commit": "4e089dffdad46f3f5593f34362d530e8fe823dcf" }
 }

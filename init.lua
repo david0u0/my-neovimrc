@@ -4,6 +4,8 @@ require("config.lazy")
 require("lazy").setup("plugins")
 require("config.local_config")
 
+vim.opt.swapfile = false
+vim.opt.backup = false
 vim.opt.mouse = ""
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
@@ -55,4 +57,5 @@ vim.keymap.set('n', '<Leader>cd', ':cd <C-r>=expand("%:p:h")<cr><c-f>F/')
 
 vim.keymap.set('n', 'gd', '<C-]>')
 vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>')
+vim.keymap.set('n', 'gu', '<cmd>lua vim.lsp.buf.references()<cr>')
 
