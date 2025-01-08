@@ -56,8 +56,21 @@ return {
 		tag = '0.1.8',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
-			telescope = require('telescope')
-			telescope.setup()
+			local telescope = require('telescope')
+			telescope.setup({
+				pickers = {
+					buffers = {
+						mappings = {
+							i = {
+								["<c-d>"] = "delete_buffer",
+							},
+							n = {
+								["<c-d>"] = "delete_buffer",
+							}
+						}
+					}
+				}
+			})
 			telescope.load_extension('fzf_mru')
 			telescope.load_extension('fzf')
 			vim.keymap.set('n', '<Leader>f', '<cmd>Telescope fzf_mru current_path<cr>')
