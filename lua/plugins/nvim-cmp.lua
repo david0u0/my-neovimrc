@@ -4,13 +4,7 @@ function source:complete(_, callback)
 	local cmp = require("cmp")
 	local response = {}
 
-	local loaded_snippets = {
-		macro_rules = {
-			prefix = "macro_rules",
-			body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
-			description = "macro_rules! … { … }"
-		}
-	}
+	local loaded_snippets = require("config.snippet")[vim.bo.filetype]
 	for key in pairs(loaded_snippets) do
 		local snippet = loaded_snippets[key]
 		local body

@@ -63,12 +63,12 @@ return {
 			vim.keymap.set('n', '<Leader>f', '<cmd>Telescope fzf_mru current_path<cr>')
 			vim.keymap.set('n', '<Leader>j', '<cmd>Telescope marks<cr>')
 			vim.keymap.set('n', '<Leader>b', '<cmd>Telescope buffers<cr>')
+			vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
 			vim.keymap.set({ 'n', 'v' }, '<Leader>g', trigger_grep, {
 				desc = [[Prepare for TelescopeGrep command.
 				1. If in visual mode, use the selected text for pattern
 				2. If in normal mode, no pattern]]
 			})
-			vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
 		end
 	}
 }
