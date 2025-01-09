@@ -10,6 +10,9 @@ vim.opt.number = true
 vim.opt.foldcolumn = '2'
 vim.opt.relativenumber = true
 vim.opt.showtabline = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 vim.cmd.colorscheme('slate')
 
 vim.keymap.set('n', '<C-L>', '<C-W>l')
@@ -29,11 +32,9 @@ vim.keymap.set({ 'n', 'v' }, '}', ']}')
 
 vim.keymap.set('n', '<Leader>tt', '<cmd>tab split<cr>')
 vim.keymap.set('n', '<Leader>to', '<cmd>tabonly<cr>')
+vim.keymap.set('n', '<Leader>tc', '<cmd>tabclose<cr>')
 vim.keymap.set('n', 'gr', 'gT') -- left tab
 -- NOTE: g<tab>: Go to the latest accessed tab page
-
-vim.keymap.set('n', '<Leader>l', '<cmd>bNext<cr>')
-vim.keymap.set('n', '<Leader>h', '<cmd>bprevious<cr>')
 
 vim.opt.statuscolumn = '%#LineNr#%{&nu&&(v:virtnum==0)?v:lnum:""}' ..
     '%#NonText#%{&rnu&&(v:relnum!=0 && v:virtnum==0)?" ".v:relnum:""}'

@@ -29,7 +29,7 @@ vim.api.nvim_create_user_command('TelescopeGrep', function(opts)
 		vim.print(args)
 	end
 	if #args > 0 then
-		search = args[1]
+		search = table.concat(args, " ")
 	end
 
 	vim.print(word_match)

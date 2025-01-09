@@ -4,7 +4,7 @@ function source:complete(_, callback)
 	local cmp = require("cmp")
 	local response = {}
 
-	local loaded_snippets = require("config.snippet")[vim.bo.filetype]
+	local loaded_snippets = require("config.snippet")[vim.bo.filetype] or {}
 	for key in pairs(loaded_snippets) do
 		local snippet = loaded_snippets[key]
 		local body
