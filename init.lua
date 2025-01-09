@@ -27,8 +27,6 @@ vim.keymap.set('n', '<Leader>q', '<cmd>q<cr>')
 vim.keymap.set('n', '<Leader>w', '<cmd>w<cr>')
 vim.keymap.set('n', '<Leader>o', '<cmd>only<cr>')
 vim.keymap.set({ 'n', 'v' }, 'g;', '<Plug>Sneak_,')
-vim.keymap.set({ 'n', 'v' }, '{', '[{')
-vim.keymap.set({ 'n', 'v' }, '}', ']}')
 
 vim.keymap.set('n', '<Leader>tt', '<cmd>tab split<cr>')
 vim.keymap.set('n', '<Leader>to', '<cmd>tabonly<cr>')
