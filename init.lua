@@ -2,6 +2,7 @@ vim.g.mapleader = ","
 
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.opt.autoread = true
 vim.opt.mouse = ""
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
@@ -19,6 +20,7 @@ vim.keymap.set('n', '<C-L>', '<C-W>l')
 vim.keymap.set('n', '<C-K>', '<C-W>k')
 vim.keymap.set('n', '<C-J>', '<C-W>j')
 vim.keymap.set('n', '<C-H>', '<C-W>h')
+vim.keymap.set('n', '<Leader>.', '<cmd>noh<cr>')
 
 vim.keymap.set({ 'n', 'v' }, '0', '^')
 vim.keymap.set({ 'n', 'v' }, '-', 'g_')
@@ -42,12 +44,15 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 	pattern = '*',
 	command = 'silent! normal! g`"zv',
 })
-
-vim.api.nvim_create_autocmd('BufReadPost', {
-	desc = 'Open file at the last position it was edited earlier',
+vim.api.nvim_create_autocmd('CursorHold', {
+	desc = 'Update buffer when file content change',
 	pattern = '*',
-	command = 'silent! normal! g`"zv',
+	command = 'checktime',
 })
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevel = 6
 
 local goto_lsp_root = function()
 	local dirs = vim.lsp.buf.list_workspace_folders()
