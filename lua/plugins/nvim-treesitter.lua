@@ -1,7 +1,17 @@
 -- Simlar as "[{" & "]}" in vim, but use treesitter to handle more language
 -- direction: 1 = forward, -1 = backword. 
 local my_move = function(direction)
-    local parser = vim.treesitter.get_parser(nil, vim.bo.filetype)
+    local ok, parser = pcall(vim.treesitter.get_parser(nil, vim.bo.filetype))
+    if not ok then
+        if direction == -1 then
+            vim.cmd.normal("[{")
+        else
+            vim.cmd.normal("]}")
+        end
+        vim.print( "No tree-sitter parser, fallback to use `{`, `}` match")
+        return
+    end
+
     local root = parser:parse()[1]:root()
     local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
     local cursor_node = root:descendant_for_range(lnum - 1, col, lnum - 1)
