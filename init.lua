@@ -1,5 +1,6 @@
 vim.g.mapleader = ","
 
+vim.opt.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.autoread = true
@@ -67,6 +68,46 @@ vim.keymap.set('n', 'gd', '<C-]>')
 vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>')
 vim.keymap.set('n', 'gu', '<cmd>lua vim.lsp.buf.references()<cr>')
 vim.keymap.set({'n', 'v'}, '=', 'gq')
+
+vim.api.nvim_create_user_command('BufOnly', function(opts)
+    local tablist = {}
+    for i = 1,vim.fn.tabpagenr('$') do
+        local buflist = vim.fn.tabpagebuflist(i)
+        for j=1,#buflist do
+            tablist[#tablist+1] = buflist[j]
+        end
+    end
+    local n_wiped = 0
+    local n_mod = 0
+    for i = 1,vim.fn.bufnr('$') do
+        if vim.fn.bufexists(i) ~= 0 then
+            local is_active = false
+            for j = 1,#tablist do
+                if tablist[j] == i then
+                    is_active = true
+                    break
+                end
+            end
+            if not is_active then
+                if vim.fn.getbufvar(i, "&mod") ~= 0 then
+                    n_mod = n_mod + 1 -- though inactive, it's modified, so no wiping
+                else
+                    n_wiped = n_wiped + 1
+                    vim.cmd.bwipeout(i)
+                end
+            end
+        end
+    end
+    local msg = string.format("%d buffers are wiped out, and %d modified buffers are skipped", n_wiped, n_mod)
+    if n_wiped == 0 then
+        require("notify")(msg, "error")
+    else
+        require("notify")(msg)
+    end
+end, {
+    nargs = "*",
+    desc = "Wipe all buffer but the active ones in tabs"
+})
 
 require("config.lazy")
 require("lazy").setup("plugins")

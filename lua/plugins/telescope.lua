@@ -48,6 +48,16 @@ end, {
 	]]
 })
 
+local bufonly = function(prompt_bufnr, is_normal)
+    vim.cmd.BufOnly()
+    require("telescope.actions").close(prompt_bufnr)
+    if is_normal then
+        require("telescope.builtin").buffers({ initial_mode = "normal" })
+    else
+        require("telescope.builtin").buffers({ })
+    end
+end
+
 return {
 	{ "pbogut/fzf-mru.vim" },
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
@@ -58,18 +68,32 @@ return {
 		config = function()
 			local telescope = require('telescope')
 			telescope.setup({
+                defaults = {
+                    layout_strategy = 'vertical',
+                    path_display = {"shorten"},
+                },
 				pickers = {
 					buffers = {
 						mappings = {
 							i = {
 								["<c-d>"] = "delete_buffer",
+								["<c-o>"] = function(prompt_bufnr) bufonly(prompt_bufnr, false) end
 							},
 							n = {
 								["<c-d>"] = "delete_buffer",
+								["<c-o>"] = function(prompt_bufnr) bufonly(prompt_bufnr, true) end
 							}
 						}
 					}
-				}
+				},
+                extensions = {
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case",
+                    },
+                },
 			})
 			telescope.load_extension('fzf_mru')
 			telescope.load_extension('fzf')

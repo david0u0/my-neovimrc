@@ -10,7 +10,7 @@ return {
 		vim.keymap.set('x', '<Leader>m', '<plug>MarkSet')
 		vim.keymap.set('n', '<Leader>r', '<plug>MarkRegex')
 		vim.keymap.set('x', '<Leader>r', '<plug>MarkRegex')
-		vim.keymap.set('n', '<Leader>N', '<plug>MarkClear')
+		vim.keymap.set('n', '<Leader>N', '<cmd>MarkClear<cr>')
 		vim.keymap.set('n', '<Leader>/', '<plug>MarkSearchAnyNext')
 		vim.keymap.set('n', '<Leader>?', '<plug>MarkSearchAnyPrev')
 		vim.keymap.set('n', '<Leader>*', '<plug>MarkSearchCurrentNext')
