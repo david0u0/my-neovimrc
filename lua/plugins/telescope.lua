@@ -20,20 +20,13 @@ vim.api.nvim_create_user_command('TelescopeGrep', function(opts)
 	local word_match = nil
 	local search = nil
 
-	vim.print(opts)
-
 	if args[1] == "-w" then
 		word_match = "-w"
-		vim.print(args)
 		table.remove(args, 1)
-		vim.print(args)
 	end
 	if #args > 0 then
 		search = table.concat(args, " ")
 	end
-
-	vim.print(word_match)
-	vim.print(search)
 
 	builtin.grep_string({
 		search = search,
@@ -98,7 +91,7 @@ return {
 			telescope.load_extension('fzf_mru')
 			telescope.load_extension('fzf')
 			vim.keymap.set('n', '<Leader>f', '<cmd>Telescope fzf_mru current_path<cr>')
-			vim.keymap.set('n', '<Leader>j', '<cmd>Telescope marks<cr>')
+			vim.keymap.set('n', '<Leader>j', '<cmd>Telescope jumplist<cr>')
 			vim.keymap.set('n', '<Leader>b', '<cmd>Telescope buffers<cr>')
 			vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
 			vim.keymap.set({ 'n', 'v' }, '<Leader>g', trigger_grep, {

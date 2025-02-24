@@ -31,6 +31,7 @@ vim.keymap.set('n', '<Leader>w', '<cmd>w<cr>')
 vim.keymap.set('n', '<Leader>o', '<cmd>only<cr>')
 vim.keymap.set({ 'n', 'v' }, 'g;', '<Plug>Sneak_,')
 
+vim.keymap.set('n', '<Leader>s', '<cmd>sp<cr>')
 vim.keymap.set('n', '<Leader>tt', '<cmd>tab split<cr>')
 vim.keymap.set('n', '<Leader>to', '<cmd>tabonly<cr>')
 vim.keymap.set('n', '<Leader>tc', '<cmd>tabclose<cr>')
@@ -68,6 +69,7 @@ vim.keymap.set('n', 'gd', '<C-]>')
 vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>')
 vim.keymap.set('n', 'gu', '<cmd>lua vim.lsp.buf.references()<cr>')
 vim.keymap.set({'n', 'v'}, '=', 'gq')
+vim.keymap.set({'n', 'v'}, '<F1>', vim.diagnostic.setqflist)
 
 vim.api.nvim_create_user_command('BufOnly', function(opts)
     local tablist = {}

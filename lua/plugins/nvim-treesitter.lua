@@ -1,7 +1,7 @@
 -- Simlar as "[{" & "]}" in vim, but use treesitter to handle more language
 -- direction: 1 = forward, -1 = backword. 
 local my_move = function(direction)
-    local ok, parser = pcall(vim.treesitter.get_parser(nil, vim.bo.filetype))
+    local ok, parser = pcall(vim.treesitter.get_parser, nil, vim.bo.filetype)
     if not ok then
         if direction == -1 then
             vim.cmd.normal("[{")
