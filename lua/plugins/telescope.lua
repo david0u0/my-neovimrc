@@ -51,6 +51,22 @@ local bufonly = function(prompt_bufnr, is_normal)
     end
 end
 
+local fzf_mru = function()
+    local files = vim.fn['fzf_mru#mrufiles#list']('raw')
+    local missing_list = {}
+    for _, path in pairs(files) do
+        local missing = vim.fn.filereadable(path) == 0
+        if missing then
+            table.insert(missing_list, path)
+            local msg = string.format("file %s is missing", path)
+            require("notify")(msg)
+        end
+    end
+    vim.fn['fzf_mru#mrufiles#remove'](missing_list)
+
+    vim.cmd('Telescope fzf_mru current_path')
+end
+
 return {
 	{ "pbogut/fzf-mru.vim" },
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
@@ -91,6 +107,7 @@ return {
 			telescope.load_extension('fzf_mru')
 			telescope.load_extension('fzf')
 			vim.keymap.set('n', '<Leader>f', '<cmd>Telescope fzf_mru current_path<cr>')
+			vim.keymap.set('n', '<Leader>f', fzf_mru)
 			vim.keymap.set('n', '<Leader>j', '<cmd>Telescope jumplist<cr>')
 			vim.keymap.set('n', '<Leader>b', '<cmd>Telescope buffers<cr>')
 			vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
