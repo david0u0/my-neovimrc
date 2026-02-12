@@ -51,7 +51,22 @@ local bufonly = function(prompt_bufnr, is_normal)
     end
 end
 
-local fzf_mru = function()
+function do_fzf_mru(opts)
+    opts = opts or {}
+    -- TODO: I don't know why I can't just set the mapping in `setup({extensions = ...})`
+    opts.attach_mappings = function(_, map)
+        map("i", "<c-o>", function(prompt_bufnr)
+            tidy_mru(prompt_bufnr, false)
+        end)
+        map("n", "<c-o>", function(prompt_bufnr)
+            tidy_mru(prompt_bufnr, true)
+        end)
+        return true
+    end
+    require('telescope').extensions.fzf_mru.current_path(opts)
+end
+
+function tidy_mru(prompt_bufnr, is_normal)
     local files = vim.fn['fzf_mru#mrufiles#list']('raw')
     local missing_list = {}
     for _, path in pairs(files) do
@@ -64,7 +79,12 @@ local fzf_mru = function()
     end
     vim.fn['fzf_mru#mrufiles#remove'](missing_list)
 
-    vim.cmd('Telescope fzf_mru current_path')
+    require("telescope.actions").close(prompt_bufnr)
+    if is_normal then
+        do_fzf_mru({ initial_mode = "normal" })
+    else
+        do_fzf_mru()
+    end
 end
 
 return {
@@ -95,19 +115,9 @@ return {
 						}
 					}
 				},
-                extensions = {
-                    fzf = {
-                        fuzzy = true,
-                        override_generic_sorter = true,
-                        override_file_sorter = true,
-                        case_mode = "smart_case",
-                    },
-                },
 			})
 			telescope.load_extension('fzf_mru')
-			telescope.load_extension('fzf')
-			vim.keymap.set('n', '<Leader>f', '<cmd>Telescope fzf_mru current_path<cr>')
-			vim.keymap.set('n', '<Leader>f', fzf_mru)
+			vim.keymap.set('n', '<Leader>f', do_fzf_mru)
 			vim.keymap.set('n', '<Leader>j', '<cmd>Telescope jumplist<cr>')
 			vim.keymap.set('n', '<Leader>b', '<cmd>Telescope buffers<cr>')
 			vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
