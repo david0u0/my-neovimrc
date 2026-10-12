@@ -1,3 +1,6 @@
+local actions = require("telescope.actions")
+
+
 local get_visual_text = function()
 	if 'v' ~= vim.fn.mode() then
 		return ""
@@ -43,7 +46,7 @@ end, {
 
 local bufonly = function(prompt_bufnr, is_normal)
     vim.cmd.BufOnly()
-    require("telescope.actions").close(prompt_bufnr)
+    actions.close(prompt_bufnr)
     if is_normal then
         require("telescope.builtin").buffers({ initial_mode = "normal" })
     else
@@ -79,7 +82,7 @@ function tidy_mru(prompt_bufnr, is_normal)
     end
     vim.fn['fzf_mru#mrufiles#remove'](missing_list)
 
-    require("telescope.actions").close(prompt_bufnr)
+    actions.close(prompt_bufnr)
     if is_normal then
         do_fzf_mru({ initial_mode = "normal" })
     else
@@ -100,6 +103,16 @@ return {
                 defaults = {
                     layout_strategy = 'vertical',
                     path_display = {"shorten"},
+                    mappings = {
+                        i = {
+                            ["<C-q>"] = actions.send_to_loclist + actions.open_loclist,
+                            ["<M-q>"] = actions.send_selected_to_loclist + actions.open_loclist,
+                        },
+                        n = {
+                            ["<C-q>"] = actions.send_to_loclist + actions.open_loclist,
+                            ["<M-q>"] = actions.send_selected_to_loclist + actions.open_loclist,
+                        },
+                    },
                 },
 				pickers = {
 					buffers = {
