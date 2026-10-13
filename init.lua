@@ -35,7 +35,7 @@ vim.keymap.set('n', '<Leader>s', '<cmd>sp<cr>')
 vim.keymap.set('n', '<Leader>tt', '<cmd>tab split<cr>')
 vim.keymap.set('n', '<Leader>to', '<cmd>tabonly<cr>')
 vim.keymap.set('n', '<Leader>tc', '<cmd>tabclose<cr>')
-vim.keymap.set('n', 'gr', 'gT') -- left tab
+vim.keymap.set('n', 'ge', 'gT') -- left tab
 -- NOTE: g<tab>: Go to the latest accessed tab page
 
 vim.opt.statuscolumn = '%#LineNr#%{&nu&&(v:virtnum==0)?v:lnum:""}' ..
