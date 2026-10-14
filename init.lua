@@ -32,7 +32,7 @@ vim.keymap.set('n', '<Leader>o', '<cmd>only<cr>')
 vim.keymap.set({ 'n', 'v' }, 'g;', '<Plug>Sneak_,')
 
 vim.keymap.set('n', '<Leader>s', '<cmd>sp<cr>')
-vim.keymap.set('n', '<Leader>tt', '<cmd>tab split<cr>')
+vim.keymap.set('n', '<Leader>tt', '<C-W>T')
 vim.keymap.set('n', '<Leader>to', '<cmd>tabonly<cr>')
 vim.keymap.set('n', '<Leader>tc', '<cmd>tabclose<cr>')
 vim.keymap.set('n', 'ge', 'gT') -- left tab
